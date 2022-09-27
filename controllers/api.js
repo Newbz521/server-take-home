@@ -49,7 +49,3 @@ exports.campaigns = async (req, res) => {
   }
 };
 
-
-
-
-// 'SELECT * FROM creator left join campaigns on creator.id = campaigns.user_id',

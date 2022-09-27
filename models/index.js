@@ -8,6 +8,7 @@ if (!global.hasOwnProperty('db')) {
         sequelize: sequelize,
         Creator: require(__dirname + '/creator')(sequelize, Sequelize.DataTypes),
         Install: require(__dirname + '/install')(sequelize, Sequelize.DataTypes),
+        Campaigns: require(__dirname + '/campaigns')(sequelize, Sequelize.DataTypes),
         /*
         *
         * TODO add any additional models here.
@@ -20,10 +21,16 @@ if (!global.hasOwnProperty('db')) {
         foreignKey: 'creator_id',
     });
 
-    // global.db.Install.belongsTo(global.db.Campaign, {
-    //     onDelete: 'cascade',
-    //     foreignKey: 'campaign_id',
-    // });
+    global.db.Install.belongsTo(global.db.Campaigns, {
+        onDelete: 'cascade',
+        foreignKey: 'creator_id',
+    });
+  
+    global.db.Campaigns.hasMany(global.db.Creator, {
+      onDelete: 'cascade',
+      foreignKey: 'creator_id',
+  });
+    
 
     /*
     *
